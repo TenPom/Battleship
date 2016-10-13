@@ -35,6 +35,8 @@ public final class Battleship {
      * Scanner to read from stdin.
      */
     private static Scanner scanner;
+    
+    private static Battleship instance;
 
     /**
      * Main-Method.
@@ -51,5 +53,16 @@ public final class Battleship {
         while (true) {
             tui.processInputLine(scanner.nextLine());
         }
+    }
+    
+    public static Battleship getInstance () {
+    	if(Battleship.instance == null) {
+    		Battleship.instance = new Battleship();
+    	}
+    	return Battleship.instance;
+    }
+    
+    public TUI getTui() {
+    	return tui;
     }
 }
