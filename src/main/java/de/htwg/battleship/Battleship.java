@@ -1,15 +1,16 @@
 // Battleship.java
 package de.htwg.battleship;
 
+import java.util.Scanner;
+
+import org.apache.log4j.PropertyConfigurator;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+
 import de.htwg.battleship.aview.gui.GUI;
 import de.htwg.battleship.aview.tui.TUI;
 import de.htwg.battleship.controller.IMasterController;
-
-import java.net.URL;
-import java.util.Scanner;
-import org.apache.log4j.PropertyConfigurator;
 /**
  * Battleship start file.
  * @author Moritz Sauter (SauterMoritz@gmx.de)
