@@ -4,6 +4,9 @@ package de.htwg.battleship.controller.impl;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+
+import de.htwg.battleship.Battleship;
+import de.htwg.battleship.aview.tui.TUI;
 import de.htwg.battleship.controller.IMasterController;
 import de.htwg.battleship.model.IPlayer;
 import de.htwg.battleship.model.IShip;
@@ -26,8 +29,12 @@ import static de.htwg.battleship.util.State.START;
 import static de.htwg.battleship.util.State.WIN1;
 import static de.htwg.battleship.util.State.WIN2;
 import static de.htwg.battleship.util.State.WRONGINPUT;
+
 import java.util.Map;
 import java.util.Set;
+
+import javax.xml.transform.Result;
+import play.*;
 
 /**
  * MasterController is an implementation of the master controller.
@@ -304,5 +311,11 @@ public class MasterController extends Observable implements IMasterController {
             }
             return map;
         }
+    }
+    
+    public Result result(String command) {
+    	TUI tui = Battleship.getInstance().getTui();
+    	tui.processInputLine(command);
+    	return ok(tui.getTuiOutput());
     }
 }
