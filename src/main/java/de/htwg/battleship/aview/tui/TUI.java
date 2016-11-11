@@ -7,7 +7,12 @@ import de.htwg.battleship.observer.IObserver;
 import static de.htwg.battleship.util.State.END;
 import static de.htwg.battleship.util.State.START;
 import static de.htwg.battleship.util.State.WRONGINPUT;
+
+import java.io.StringWriter;
+
 import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.WriterAppender;
 
 /**
  * Textual User Interface.
@@ -42,6 +47,10 @@ public class TUI implements IObserver {
      */
     private final Logger logger =
             Logger.getLogger("de.htwg.battleship.aview.tui");
+    
+    private StringWriter sw = new StringWriter();
+    private WriterAppender wa = new WriterAppender(new PatternLayout(), sw);
+    
     /**
      * Public constructor.
      * @param master master controller
@@ -50,6 +59,7 @@ public class TUI implements IObserver {
         this.master = master;
         this.master.addObserver(this);
         this.printTUI();
+        logger.addAppender(wa);
     }
 
     /**
@@ -215,6 +225,10 @@ public class TUI implements IObserver {
     }
 
     public String getTuiOutput() {
-        return this.logger.toString();
+       return sw.toString();
+    }
+    
+    public String toHTML() {
+    	return "logger is schuld";
     }
 }

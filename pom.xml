@@ -4,42 +4,49 @@
 	<groupId>de.htwg.se</groupId>
 	<artifactId>Battleship</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
 	<name>SE2014WS-15-Schiffe versenken</name>
+
 	<url>http://maven.apache.org</url>
+	<packaging>jar</packaging>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit.version>4.12</junit.version>
+		<sonar.version>2.4</sonar.version>
+		<play.version>2.5.9</play.version>
+		<log4j.version>1.2.17</log4j.version>
+		<mvn.jar.version>3.0.2</mvn.jar.version>
+		<mvn.compiler.version>3.5.1</mvn.compiler.version>
+		<mvn.assembly.version>2.6</mvn.assembly.version>
+		<google.guice.version>3.0</google.guice.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.mojo</groupId>
-			<artifactId>sonar-maven-plugin</artifactId>
-			<version>2.4</version>
-			<type>maven-plugin</type>
+			<version>${junit.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
-			<version>3.0</version>
-			<type>jar</type>
+			<version>${google.guice.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.14</version>
-			<type>jar</type>
+			<version>${log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.typesafe.play</groupId>
 			<artifactId>play_2.11</artifactId>
-			<version>2.5.9</version>
+			<version>${play.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>sonar-maven-plugin</artifactId>
+			<version>${sonar.version}</version>
+			<type>maven-plugin</type>
 		</dependency>
 	</dependencies>
 	<build>
@@ -47,11 +54,48 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>${mvn.compiler.version}</version>
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${mvn.jar.version}</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>de.htwg.battleship.Battleship</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${mvn.assembly.version}</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>de.htwg.battleship.Battleship</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>assemble-all</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

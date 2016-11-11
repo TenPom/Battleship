@@ -22,7 +22,14 @@ public final class Battleship {
     /**
      * Private Constructor.
      */
-    private Battleship() { }
+    private Battleship() { 
+    	PropertyConfigurator.configure("log4j.properties");
+        Injector injector = Guice.createInjector(new BattleshipModule());
+        master = injector.getInstance(IMasterController.class);
+        master.setInjector(injector);
+        tui = new TUI(master);
+        new GUI(master);
+    }
     /**
      * MasterController of the entire game.
      */
