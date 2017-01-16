@@ -72,4 +72,8 @@ public final class Battleship {
     public TUI getTui() {
     	return tui;
     }
+    
+    public IMasterController getController() {
+    	return master;
+    }
 }

@@ -4,6 +4,8 @@ package de.htwg.battleship.aview.tui;
 
 import de.htwg.battleship.controller.IMasterController;
 import de.htwg.battleship.observer.IObserver;
+import scala.collection.concurrent.Debug;
+
 import static de.htwg.battleship.util.State.END;
 import static de.htwg.battleship.util.State.START;
 import static de.htwg.battleship.util.State.WRONGINPUT;
@@ -133,7 +135,8 @@ public class TUI implements IObserver {
      * @param line input of stdin
      */
     public final void processInputLine(final String line) {
-        String[] field = line.split(" ");
+    	String[] field = line.split(" ");
+    	
 //        Start End Menu
         if (master.getCurrentState() == START
                 || master.getCurrentState() == END) {
@@ -226,9 +229,5 @@ public class TUI implements IObserver {
 
     public String getTuiOutput() {
        return sw.toString();
-    }
-    
-    public String toHTML() {
-    	return "logger is schuld";
     }
 }
