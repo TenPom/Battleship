@@ -78,6 +78,12 @@ public interface IMasterController extends IObservable {
      * @param injector
      */
     void setInjector(Injector injector);
+    
+    /**
+     * Tui Method for WUI
+     * @param line
+     */
+    void processInputLine(final String line);
 
     /**
      * Method to fill a Map with ship coordinates.

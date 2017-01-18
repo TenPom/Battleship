@@ -25,6 +25,7 @@ import java.util.Set;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
+import de.htwg.battleship.aview.tui.TUI;
 import de.htwg.battleship.controller.IMasterController;
 import de.htwg.battleship.model.IPlayer;
 import de.htwg.battleship.model.IShip;
@@ -61,6 +62,10 @@ public class MasterController extends Observable implements IMasterController {
      */
     private final IPlayer player2;
     /**
+     * tui
+     */
+    private final TUI tui;
+    /**
      * Presentation of the Game.
      */
     private State currentState;
@@ -82,6 +87,7 @@ public class MasterController extends Observable implements IMasterController {
         this.player1 = player1;
         this.player2 = player2;
         this.currentState = START;
+        this.tui = new TUI(this);
     }
 
     @Override
@@ -282,6 +288,11 @@ public class MasterController extends Observable implements IMasterController {
         return map;
     }
 
+    
+    public final void processInputLine(final String line) {
+    	tui.processInputLine(line);
+    }
+    
     /**
      * Utility Method to create a Map where ships take place.
      * @param ship specified ship

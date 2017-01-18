@@ -27,8 +27,9 @@ public final class Battleship {
         Injector injector = Guice.createInjector(new BattleshipModule());
         master = injector.getInstance(IMasterController.class);
         master.setInjector(injector);
-        tui = new TUI(master);
-        new GUI(master);
+//        tui = new TUI(master);
+//        new GUI(master);
+        Battleship.instance = this;
     }
     /**
      * MasterController of the entire game.
@@ -50,12 +51,13 @@ public final class Battleship {
      * @param args not used
      */
     public static void main(final String[] args) {
+//    	PropertyConfigurator.configure(Battleship.class.getClassLoader().getResource("log4j.properties"));
         PropertyConfigurator.configure("log4j.properties");
         Injector injector = Guice.createInjector(new BattleshipModule());
         master = injector.getInstance(IMasterController.class);
         master.setInjector(injector);
-        tui = new TUI(master);
-        new GUI(master);
+//        tui = new TUI(master);
+//        new GUI(master);
         scanner = new Scanner(System.in);
         while (true) {
             tui.processInputLine(scanner.nextLine());
@@ -73,7 +75,13 @@ public final class Battleship {
     	return tui;
     }
     
-    public IMasterController getController() {
+    public static IMasterController getController() {
+    	return master;
+    }
+    
+    public IMasterController createController() {
+    	Injector injector = Guice.createInjector(new BattleshipModule());
+        master = injector.getInstance(IMasterController.class);
     	return master;
     }
 }
