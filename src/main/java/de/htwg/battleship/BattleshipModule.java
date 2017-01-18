@@ -26,7 +26,7 @@ public class BattleshipModule extends AbstractModule {
     @Override
     protected final void configure() {
         bind(IMasterController.class).to(
-                MasterController.class).in(Singleton.class);
+                MasterController.class);//.in(Singleton.class);
         bind(IBoard.class).to(Board.class);
         bind(IPlayer.class).to(Player.class);
         bind(IShip.class).to(Ship.class);
